@@ -1,0 +1,22 @@
+services:
+  redis:
+    build: ./redis
+    container_name: sky-redis
+    restart: always
+    shm_size: '1gb'
+#    network_mode: host
+    ports:
+      - 6378:6379
+    volumes:
+      - ./data:/data
+
+  cron:
+    build: ./cron
+    container_name: sky-cron
+    restart: always
+    shm_size: '1gb'
+    volumes:
+      - /var/lib/lxd/storage-pools/default/containers/ubuntu-1/rootfs/var/www/html:/var/www/html:z
+    entrypoint: /cron.sh
+    privileged: true
+
