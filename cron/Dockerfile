@@ -16,13 +16,7 @@ RUn cp /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
 
 RUN wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | bash >/dev/null 2>&1
 
-RUN set -ex; \
-    apt-get update \
-    apt-get install -y --no-install-recommends \
-    lsphp82 lsphp82-pspell lsphp82-common lsphp82-curl lsphp82-imagick lsphp82-imap lsphp82-intl lsphp82-pgsql lsphp82-opcache lsphp82-redis lsphp82-apcu \
-    ; \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y lsphp82 lsphp82-pspell lsphp82-common lsphp82-curl lsphp82-imagick lsphp82-imap lsphp82-intl lsphp82-pgsql lsphp82-opcache lsphp82-redis lsphp82-apcu
 
 COPY .smbcredentials /root/.smbcredentials
 RUN chown -R root:root /root/.smbcredentials && chmod -R 600 /root/.smbcredentials
