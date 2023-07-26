@@ -1,7 +1,7 @@
 services:
   redis:
     build: ./redis
-    container_name: sky-redis
+    container_name: redis
     restart: always
     shm_size: '1gb'
 #    network_mode: host
